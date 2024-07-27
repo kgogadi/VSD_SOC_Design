@@ -193,21 +193,117 @@ In order to access the OpenLane tool, we will be needing some basic linux comman
 * clear : This command clears the terminal.
 
 ###Design Preparation Setup
-In order to enter into BASH, by being in OpenLane directory we should use a command called **docker**. By using docker command we will enter into the Bash. After entering into bash we have to use the script flow.tcl, because this .tcl file contains the steps that need to be executed in the OpenLane and along with the tcl file we need to use -interactive switch in order to perform step by step process. If not used interactive switch the whole flow i.e RTL to GDS will be executed once and the final report will be given. The command that we should use for this is **./flow.tcl -interactive**.Now OpenLane is opened and we can observe the change in prompt and now we have to input packages required to run the flow and for this we use the command **package require openlane 0.9**.
+In order to enter into BASH, by being in OpenLane directory we should use a command called **docker**. By using docker command we will enter into the Bash. After entering into bash we have to use the script flow.tcl, because this .tcl file contains the steps that need to be executed in the OpenLane and along with the tcl file we need to use **-interactive** switch in order to perform step by step process. If not used interactive switch the whole flow i.e RTL to GDS will be executed once and the final report will be given. The command that we should use for this is **./flow.tcl -interactive**.Now OpenLane is opened and we can observe the change in prompt and now we have to input packages required to run the flow and for this we use the command **package require openlane 0.9**.
 ![Screenshot from 2024-07-26 08-48-34](https://github.com/user-attachments/assets/b735288a-0b2b-41bf-af3d-4ca82c8aa986)
 ![Screenshot from 2024-07-27 23-27-46](https://github.com/user-attachments/assets/6e443b2d-7b45-4146-9967-3bd2a7b7a7fc)
-
+At the end of the terminal we can see that Preparation is complete.
 ![Screenshot from 2024-07-27 23-34-11](https://github.com/user-attachments/assets/d75d278d-1fb1-428d-92e0-962c3cda0bab)
 
-
+One of the files will be "merged.lef" file, it contains metal layer level and cell level information.
+step 2: **run_syntheses**
+Tool will take some time to perform synthesis, when completed it displays the Synthesis was successful message.
 ![Screenshot from 2024-07-28 00-12-43](https://github.com/user-attachments/assets/3b003d14-1cb8-4732-a68d-26da772ef2b0)
-
+to find out the flipflop percentage in total cells. For this we use reports from Synthesis stage.
 ![Screenshot from 2024-07-28 00-29-17](https://github.com/user-attachments/assets/6777292b-c8a6-4ef7-aa45-17342038bd34)
+In the above image,we can see that the total no.of cells used in the design are 14876 and the count of D-flipflops in the design are 1613. So, the flipflop percentage is calculated as
 
+Flop Ratio = ((no.of flipflops) / (Total no.of cells))100 = (1613/14876)100 = 10.84%
 
+# Good FloorPlan Vs Bad FloorPlan and Introduction to Library Cells
+## Chip FloorPlanning Considerations
+### Utilization Factor and Aspect Ratio
+**FLOOR PLANNING**
+1. Define height and width of core and die areas.
 
+Core is an area in a chip which is used to place all the logic cells and components in a chip. It is the place where logic lies in a chip.
+Die is an area that encircles the core area and used for placing I/O related components
 
+![image](https://github.com/user-attachments/assets/c4855bb1-643f-4aff-b65a-c0c05a163576)
 
+The height and width of core area will be decided by the netlist of the design. It will be based on the no.of components required in order to execute the logic and the height and width of the die area will be dependent on the core area height and width.
 
+![image](https://github.com/user-attachments/assets/eaa00b0e-6d74-4678-bdc5-2294892c9642)
 
+consider a netlist that is having two logic gates and two flipflops each having area of 1 sq.unit. The netlist contains 4 elements and the minimum total area required for the core area will be 4 sq.units.
+
+![image](https://github.com/user-attachments/assets/8cb3c9c9-384b-4d6c-9d37-5bd404d21899)
+
+![image](https://github.com/user-attachments/assets/1a664ace-fc02-4f42-8bf6-92a5e30e1d82)
+
+Utilization Factor : Utilization Factor is defined as "The ratio of the core area occupied by the netlist to the total core area".For a good FloorPlan, The Utilization Factor should never be '1' because when the Utilization factor becomes '1' , there will be no place for adding additional logic if needed and it will be considered as a bad FloorPlan.
+
+**Utilization Factor = (Area occupied by netlist / Total core area)**
+
+Aspect Ratio : Aspect Ratio is defined as "The ratio of Height of the core to the width of the core". If the Aspect ratio is '1' , then the core is said to be in a square shape and other than '1' the core will be a rectangle.
+
+**Aspect Ratio = (Height of the core / Width of the core)**
+
+Considering different cases 
+Case 1:
+![image](https://github.com/user-attachments/assets/0267d674-63ea-4b1b-84d5-5fed90f72ee1)
+
+**Utilization factor**= (4 squnits)/(4 squnits) = 1
+**Aspect Ratio** = (2 units)/(2 units) = 1 //The core is in a square shape.
+
+case 2:
+![image](https://github.com/user-attachments/assets/b1ae6e65-d726-48dc-8742-f1078af4c34c)
+**Utilization factor** = (4 squnits)/(8 squnits) = 0.5
+**Aspect Ratio** = (2 units)/(4 units) = 0.5 //The core is in a rectangular shape.
+case 3:
+![image](https://github.com/user-attachments/assets/d883df3c-5128-48e0-b94d-e5b9cd8ed00b)
+
+**Utilization factor** = (4 squnits)/(16 squnits) = 0.25
+**Aspect Ratio** = (4 units)/(4 units) = 1 //The core is in a square shape.
+
+2. Define Locations of **Preplaced Cells**
+
+The concept of pre-placing cells is nothing but reusing already designed blocks by not designing them again and again. The most commonly used pre-placed blocks are Memory , comparators , Mux etc.. , These blocks can be called as Macros (or) I.P's .We need to place these macros very carefully in such a way that if these blocks are more connected to input pins, then we should place these close to those input pins. These should be placed in a way such that the wiring length should be decreased.
+
+The term Pre-placed refers to "Placing those blocks prior to placement stage that is in Floorplan stage. After placing those blocks in Floorplan stage we need to define some placement blockages in order to avoid Placing of other standard cell near to those blocks by the tool during placement stage. By using this pre-placed cells the Time-to-Market can be reduced.
+
+![image](https://github.com/user-attachments/assets/1ef60d40-8127-48e3-8103-0ee21d417d46)
+
+## De-coupling Capacitors
+Generally these pre-placed blocks will be high-power draining blocks. In some cases, the power they recieve from the power source will not be sufficient for them to perform switching i.e the signal will not be in the range of its noise margin because there will be a voltage drop in the inter-connecting wires. In this case, the De-coupling Capacitors comes into the picture.
+![Screenshot (72)](https://github.com/user-attachments/assets/48c804f9-b69f-4d86-bc77-a9124d799446)
+![Screenshot (73)](https://github.com/user-attachments/assets/e721b0b1-cab4-4bac-8307-f7aa93091c7d)
+These De-cap cells will be placed near to the blocks that will drain high power. When there is no switching is being performed the De-cap cell will be connected to power source and gets charged to its high level and when the switching is being performed the De-cap cells will be connected to the blocks and the power required for the block will be supplied by the De-cap cell, and when ever the switching stops again the De-cap cell will start to getting charged. This is the working of De-cap cells and these cells plays a crucial role in the circuit design.
+![Screenshot (74)](https://github.com/user-attachments/assets/49e18fa8-6c66-4a88-a102-91b57ca67ade)
+![Screenshot (75)](https://github.com/user-attachments/assets/491a4155-5378-4f7b-9e28-4e381416dd53)
+![Screenshot (76)](https://github.com/user-attachments/assets/0759a826-ad83-426a-97ab-f4cbb510ecda)
+![Screenshot (77)](https://github.com/user-attachments/assets/94582e74-b128-4afd-bd72-f56904df9960)
+![Screenshot (78)](https://github.com/user-attachments/assets/859e4d10-ba71-49b5-935f-ec885e11bc30)
+
+## Power Planning
+In the previous section we used De-cap cells to manage power for different blocks.But Decap cells have some limitations such as Leakage power and increase in the area of chip. To overcome these we use a technique called Powerplanning. In some areas of the chip when there is more switching happening, two tyoes of phenomena can occur
+
+* Voltage drop
+* Ground bounce
+![image](https://github.com/user-attachments/assets/7ccf47a3-6b96-4c4f-bc58-5cb81d225666)
+![Screenshot (79)](https://github.com/user-attachments/assets/034dda85-d1c5-4be1-a58f-82e058663305)
+**Ground Bounce**: When a group of cells are simultaneoisly switching from 1 to 0, then every cell dumps the power to th ground simultaneously to the same ground pin. In this case the ground instead of being at 0 experiences a short rise in the voltage and this is called as "Ground Bounce".The problem occurs only when the voltage level goes above the noise margin.
+![Screenshot (80)](https://github.com/user-attachments/assets/e4b6a6b6-d334-4ebe-bc08-03d049d0d7c9)
+**Voltage drop** : When a group of cells are simultaneously switching from 0 to 1, then every cell needs the power and In case the power is supplying from one source, there may occur the shotage of power and drop in the input voltage happens at that place. This is called as "Voltage Drop". The problem occurs only when the voltage level goes below the noise margin.
+![Screenshot (81)](https://github.com/user-attachments/assets/31d0d03d-b6d8-4556-b2d0-803135201137)
+![Screenshot (82)](https://github.com/user-attachments/assets/0e9379b1-2232-416a-bba8-233462c0569f)
+In order to avoid these abnormalities, a technique called Power Planning is used. In this technique two different Power mashes are used, one for Vdd and another one for Ground.These meshes are prepared by using top two metal layers because they should have less voltage drop. These meshes will be spread across the design and are connected to multiple sources of Vdd and Ground.
+![Screenshot (83)](https://github.com/user-attachments/assets/82c88af5-bf70-40c3-bea8-de02dbaee1ce)
+With this technique whenever a cell needs power to switch from 0 to 1, it takes from nearest Vdd layer and if a cell needs to drain the power it will drain it to the nearest Ground Layer.
+![Screenshot (84)](https://github.com/user-attachments/assets/636f8138-10c3-4886-ba68-f5c806c8ffe2)
+
+## Pin Placement
+Pin Placement is one of the crucial step in the design process. Bad pin placement results increase in the length of wire used for connectivity, which inturn results in some adverse affects. Pins should be placed in such a way that the required for connecting them to the blocks should be as less as possible. For example if an input pin is driving two blocks then that pin should be placed near to those two blocks.
+
+Let's consider the below design
+![image](https://github.com/user-attachments/assets/4be36da3-cda6-4003-8eb2-332303fb67dc)
+For the above design the effective pin placement will look like as follows
+![image](https://github.com/user-attachments/assets/12232ad8-f068-4bbf-ac12-8d54e5dcd2c1)
+
+In the above pin placement, we can observe two things
+
+* The order of input pins and output pins is random. As already mentioned the pins should be placed based on the connectivity not based on the order.
+* The pins used for clock signals are larger in size when compared to pins used for signals, this is because clock is one of the important signal in the design and delays and voltage drops in the clock signal leads to failure of the chip. That is the reason why we use higher metal layers for routing the clock in the design.
+
+After finishing the pin placement, we should use placement blockages outside of the core area and inside of the die area inorder to avoid placement and routing tool using that space for placement and routing, because it is the area dedicated only for Pin Placement purpose.
+![image](https://github.com/user-attachments/assets/a2901a68-f6c4-4c4a-8754-ed9a9ef4dace)
 
