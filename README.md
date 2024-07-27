@@ -195,7 +195,9 @@ In order to access the OpenLane tool, we will be needing some basic linux comman
 ###Design Preparation Setup
 In order to enter into BASH, by being in OpenLane directory we should use a command called **docker**. By using docker command we will enter into the Bash. After entering into bash we have to use the script flow.tcl, because this .tcl file contains the steps that need to be executed in the OpenLane and along with the tcl file we need to use -interactive switch in order to perform step by step process. If not used interactive switch the whole flow i.e RTL to GDS will be executed once and the final report will be given. The command that we should use for this is **./flow.tcl -interactive**.Now OpenLane is opened and we can observe the change in prompt and now we have to input packages required to run the flow and for this we use the command **package require openlane 0.9**.
 ![Screenshot from 2024-07-26 08-48-34](https://github.com/user-attachments/assets/b735288a-0b2b-41bf-af3d-4ca82c8aa986)
+![Screenshot from 2024-07-27 23-27-46](https://github.com/user-attachments/assets/6e443b2d-7b45-4146-9967-3bd2a7b7a7fc)
 
+![Screenshot from 2024-07-27 23-34-11](https://github.com/user-attachments/assets/d75d278d-1fb1-428d-92e0-962c3cda0bab)
 
 
 
