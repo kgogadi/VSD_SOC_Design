@@ -307,3 +307,14 @@ In the above pin placement, we can observe two things
 After finishing the pin placement, we should use placement blockages outside of the core area and inside of the die area inorder to avoid placement and routing tool using that space for placement and routing, because it is the area dedicated only for Pin Placement purpose.
 ![image](https://github.com/user-attachments/assets/a2901a68-f6c4-4c4a-8754-ed9a9ef4dace)
 
+
+
+
+![Screenshot from 2024-07-28 03-36-47](https://github.com/user-attachments/assets/652aa591-e635-406f-807c-34e9b82acc2d)
+![Screenshot from 2024-07-28 03-36-58](https://github.com/user-attachments/assets/1586c139-c439-44e4-8824-42e60eb839ae)
+![Screenshot from 2024-07-28 03-37-56](https://github.com/user-attachments/assets/fa3194a2-b6c0-4d02-a59f-39cbd9b66ffc)
+![Screenshot from 2024-07-28 03-39-48](https://github.com/user-attachments/assets/d2bfb49e-21dc-4f82-8929-c9c4b283503f)
+![Screenshot from 2024-07-28 03-47-00](https://github.com/user-attachments/assets/9196b18a-0a2d-497d-b154-9e5a28279acf)
+![Screenshot from 2024-07-28 03-47-29](https://github.com/user-attachments/assets/e1f992b8-a021-4557-9c7d-51401dffbfe8)
+![Screenshot from 2024-07-28 04-17-57](https://github.com/user-attachments/assets/343e2492-2083-4f54-91e7-acaae589511b)
+
