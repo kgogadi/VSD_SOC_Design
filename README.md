@@ -200,6 +200,9 @@ In order to enter into BASH, by being in OpenLane directory we should use a comm
 ![Screenshot from 2024-07-27 23-34-11](https://github.com/user-attachments/assets/d75d278d-1fb1-428d-92e0-962c3cda0bab)
 
 
+![Screenshot from 2024-07-28 00-12-43](https://github.com/user-attachments/assets/3b003d14-1cb8-4732-a68d-26da772ef2b0)
+
+![Screenshot from 2024-07-28 00-29-17](https://github.com/user-attachments/assets/6777292b-c8a6-4ef7-aa45-17342038bd34)
 
 
 
