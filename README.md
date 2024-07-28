@@ -342,3 +342,6 @@ For above example tool will place the blocks by using the estimated wire length 
 
 ![Screenshot (86)](https://github.com/user-attachments/assets/26b65605-9409-42ba-a6bf-5effe500b790)
 
+![Screenshot from 2024-07-28 05-27-50](https://github.com/user-attachments/assets/7cc51a79-db90-4a4b-a22a-2d5d14db34fc)
+![Screenshot from 2024-07-28 05-27-14](https://github.com/user-attachments/assets/0ff0fde8-c892-4fd0-a78c-d45b228c97d2)
+![Screenshot from 2024-07-28 05-27-24](https://github.com/user-attachments/assets/0fea7fab-0cfb-400e-85df-e799aa2f5f60)
