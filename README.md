@@ -324,8 +324,10 @@ In order to enter into the MAGIC tool we need to use the command
 
  **magic -T** **/home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &**
 ![Screenshot from 2024-07-28 03-47-00](https://github.com/user-attachments/assets/9196b18a-0a2d-497d-b154-9e5a28279acf)
-![Screenshot from 2024-07-28 03-47-29](https://github.com/user-attachments/assets/e1f992b8-a021-4557-9c7d-51401dffbfe8)
-![Screenshot from 2024-07-28 04-17-57](https://github.com/user-attachments/assets/343e2492-2083-4f54-91e7-acaae589511b)
+![Screenshot from 2024-08-02 03-23-12](https://github.com/user-attachments/assets/5e837074-3be6-41df-83ee-55361d53f04d)
+
+![Screenshot from 2024-08-02 03-16-47](https://github.com/user-attachments/assets/4769f1c8-0dc7-418b-96c2-da33efbafabb)
+
 
 ## Library Binding and Placement
 ### Netlist binding and initial place design
@@ -342,6 +344,20 @@ For above example tool will place the blocks by using the estimated wire length 
 
 ![Screenshot (86)](https://github.com/user-attachments/assets/26b65605-9409-42ba-a6bf-5effe500b790)
 
-![Screenshot from 2024-07-28 05-27-50](https://github.com/user-attachments/assets/7cc51a79-db90-4a4b-a22a-2d5d14db34fc)
-![Screenshot from 2024-07-28 05-27-14](https://github.com/user-attachments/assets/0ff0fde8-c892-4fd0-a78c-d45b228c97d2)
+
+![Screenshot from 2024-08-02 03-30-02](https://github.com/user-attachments/assets/5212b3c0-75f4-4e24-9b72-3b8a6f8445f6)
+
+![Screenshot from 2024-08-02 03-30-18](https://github.com/user-attachments/assets/51655cab-432a-463a-aca9-6e12e24128d7)
+
 ![Screenshot from 2024-07-28 05-27-24](https://github.com/user-attachments/assets/0fea7fab-0cfb-400e-85df-e799aa2f5f60)
+
+Day 3
+
+![Screenshot from 2024-08-02 03-44-58](https://github.com/user-attachments/assets/227019c4-89d5-42ca-bc73-a740b1c9cadd)
+![Screenshot from 2024-08-02 03-38-20](https://github.com/user-attachments/assets/23ac9dfb-d277-404b-8258-f13259f4ff78)
+![Screenshot from 2024-08-02 03-38-16](https://github.com/user-attachments/assets/7389d6d4-1411-434f-84b0-b0e91cfbc31d)
+![Screenshot from 2024-08-02 03-38-20](https://github.com/user-attachments/assets/5f6bbb99-40d2-4077-a186-b5e3bfe14ab1)
+
+![Screenshot from 2024-08-02 21-42-42](https://github.com/user-attachments/assets/0d6e23dd-ea12-417e-88ff-c5bb841e3dd1)
+![Screenshot from 2024-08-02 21-42-42](https://github.com/user-attachments/assets/004cf878-7a12-464b-b2bb-39e3b8b6b027)
+![Screenshot from 2024-08-02 04-11-43](https://github.com/user-attachments/assets/05f69a37-fb69-4233-bfc2-d8518eb5c278)
