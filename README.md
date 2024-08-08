@@ -344,6 +344,16 @@ For above example tool will place the blocks by using the estimated wire length 
 
 ![Screenshot (86)](https://github.com/user-attachments/assets/26b65605-9409-42ba-a6bf-5effe500b790)
 
+### Congestion aware placement using replace
+After successful Floorplanning, the next step in the design process is Placement. Placement stage will consist of two stages
+
+Global Placement - In Global Placement stage tool decides the places for all standard cells in the design.
+Detailed Placement - In Detailed Placement stage the tool places all the standard cells in their designated places and legalization of the Placement will be done. Legalization is nothing but making sure that standard cells are not overlapped on each other in the design and are placed with in the site rows of the design.
+In order to start the placement we need to use the command run_placement.
+
+After Placement is done to check whether the cells are placed correctly or not, we need to check GUI and that will be done using MAGIC tool with the following command
+
+**magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &**
 
 ![Screenshot from 2024-08-02 03-30-02](https://github.com/user-attachments/assets/5212b3c0-75f4-4e24-9b72-3b8a6f8445f6)
 
@@ -351,14 +361,19 @@ For above example tool will place the blocks by using the estimated wire length 
 
 ![Screenshot from 2024-07-28 05-27-24](https://github.com/user-attachments/assets/0fea7fab-0cfb-400e-85df-e799aa2f5f60)
 
-Day 3
+# Design library cell using Magic Layout and ngspice characterization
+## Inception of Layout and CMOS fabrication process
+### Lab steps to create std cell layout and extract spice netlist
+We need to extract the spice netlist from the given Inverter from MAGIC Tool inorder to spice simulation in ngspice tool.
 
+First we need to create an extraction file of the inverter. we can do this by using the command extract all in the tkcon window. This will create an extracted file in the vsdstdcelldesign directory.
 ![Screenshot from 2024-08-02 03-44-58](https://github.com/user-attachments/assets/227019c4-89d5-42ca-bc73-a740b1c9cadd)
 ![Screenshot from 2024-08-02 03-38-20](https://github.com/user-attachments/assets/23ac9dfb-d277-404b-8258-f13259f4ff78)
+Next we need to create a spice file using this extracted file to use within the ngspice tool.For this the command will be
+
+**ext2spice cthresh 0 rthresh 0,** this will not create any new file.
 ![Screenshot from 2024-08-02 03-38-16](https://github.com/user-attachments/assets/7389d6d4-1411-434f-84b0-b0e91cfbc31d)
 ![Screenshot from 2024-08-02 03-38-20](https://github.com/user-attachments/assets/5f6bbb99-40d2-4077-a186-b5e3bfe14ab1)
-
-
 
 ![Screenshot from 2024-08-02 21-42-42](https://github.com/user-attachments/assets/004cf878-7a12-464b-b2bb-39e3b8b6b027)
 ![Screenshot from 2024-08-02 04-11-43](https://github.com/user-attachments/assets/05f69a37-fb69-4233-bfc2-d8518eb5c278)
