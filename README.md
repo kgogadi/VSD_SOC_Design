@@ -406,26 +406,31 @@ Propogation Delay : It is the time taken for the 50% of transition from 0 to 1 a
 
 ## Introduction to Magic and steps to load Sky130 tech-rules
 m3-layer
+
 ![Screenshot from 2024-08-02 23-20-17](https://github.com/user-attachments/assets/5c096c09-b3a8-4c0b-a02f-c33aa507f9f4)
 m3- Peripheral Rules
+
 ![Screenshot from 2024-08-02 23-21-46](https://github.com/user-attachments/assets/51f1a4bb-93ae-47dd-b041-ae90409a6b92)
-
-
 
 ![Screenshot from 2024-08-02 23-32-15](https://github.com/user-attachments/assets/f11d0ebf-cd08-428e-b518-d49151354728)
 
-![Screenshot from 2024-08-02 23-32-41](https://github.com/user-attachments/assets/6e6d5eeb-0954-43a6-85ec-9a2158f72b43)
-
+## Fixing Poly 9 error in Sky130 tech file
 ![Screenshot from 2024-08-02 23-37-58](https://github.com/user-attachments/assets/b06bbd16-eda1-4280-8693-17a1a1cf8903)
 
 ![Screenshot from 2024-08-02 23-39-17](https://github.com/user-attachments/assets/98bfc43a-bb97-496a-9f08-26416263a30f)
+
+Open the Sky130a.tech file, which is in the drc_tests directory and check for poly.9 keyword and make the changes that are shown in the images below and save it.
 
 ![Screenshot from 2024-08-02 23-44-07](https://github.com/user-attachments/assets/387e6ef5-d711-4b2a-adf3-ed76e6626083)
 
 ![Screenshot from 2024-08-02 23-57-35](https://github.com/user-attachments/assets/61e055a0-b844-4fe2-bfa1-90259f3e4d35)
 
+Now again load the tech file by using the command tech **load sky130A.tech** , and again check drc by using command drc check in the tkcon terminal.
+
 ![Screenshot from 2024-08-02 23-59-43](https://github.com/user-attachments/assets/0a7325aa-06b8-4f1f-9cf8-a4b29569b3a2)
 
+## Lab challenge exercise to describe DRC error as geometrical construct
+Now load nwell.mag file into the magic and check for violations.
 ![Screenshot from 2024-08-03 00-12-26](https://github.com/user-attachments/assets/7cb5ca23-d7b5-4f97-b171-f3f5296acc3b)
 ![Screenshot from 2024-08-03 00-15-59](https://github.com/user-attachments/assets/aff3f7fc-1929-4b1a-9538-7345a3ffda81)
 ![Screenshot from 2024-08-03 00-21-54](https://github.com/user-attachments/assets/c495ee83-6c3c-4fae-a087-3b952b943381)
