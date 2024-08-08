@@ -365,32 +365,52 @@ After Placement is done to check whether the cells are placed correctly or not, 
 ## Inception of Layout and CMOS fabrication process
 ### Lab steps to create std cell layout and extract spice netlist
 We need to extract the spice netlist from the given Inverter from MAGIC Tool inorder to spice simulation in ngspice tool.
-
 First we need to create an extraction file of the inverter. we can do this by using the command extract all in the tkcon window. This will create an extracted file in the vsdstdcelldesign directory.
+
 ![Screenshot from 2024-08-02 03-44-58](https://github.com/user-attachments/assets/227019c4-89d5-42ca-bc73-a740b1c9cadd)
 ![Screenshot from 2024-08-02 03-38-20](https://github.com/user-attachments/assets/23ac9dfb-d277-404b-8258-f13259f4ff78)
 Next we need to create a spice file using this extracted file to use within the ngspice tool.For this the command will be
-
 **ext2spice cthresh 0 rthresh 0,** this will not create any new file.
+
 ![Screenshot from 2024-08-02 03-38-16](https://github.com/user-attachments/assets/7389d6d4-1411-434f-84b0-b0e91cfbc31d)
 ![Screenshot from 2024-08-02 03-38-20](https://github.com/user-attachments/assets/5f6bbb99-40d2-4077-a186-b5e3bfe14ab1)
 
 ![Screenshot from 2024-08-02 21-42-42](https://github.com/user-attachments/assets/004cf878-7a12-464b-b2bb-39e3b8b6b027)
 ![Screenshot from 2024-08-02 04-11-43](https://github.com/user-attachments/assets/05f69a37-fb69-4233-bfc2-d8518eb5c278)
-
+# SKY130 Tech File Labs
+## Lab Steps to create final SPICE deck using Sky130tech
 ![Screenshot from 2024-08-02 22-17-44](https://github.com/user-attachments/assets/fee6e157-09b9-404c-93ea-9aee35b2a564)
+After that we need to run the SPICE file in the ngspice tool by using the command **ngspice sky130_inv.spice**
 ![Screenshot from 2024-08-02 22-16-22](https://github.com/user-attachments/assets/d32ecd6c-3f2c-440a-9a87-faae6680451b)
 
 ![Screenshot from 2024-08-02 22-18-48](https://github.com/user-attachments/assets/3e83bec0-de87-40e7-9b45-29c0d71ffb32)
 
+## Lab Steps to characterize the Inverter using sky130 model files
+From the plot that we got from ngspice, we need to characterize four parameters of the Inverter.
+Rise time : It is the time taken for the output waveform to go to 80% of its max value from 20% of its max value.
+x0 = 6.16138e-09, y0 = 0.660007
 
+x0 = 6.20366e-09, y0 = 2.64009
+
+From the above values, Rise time = 0.0422 ns
+
+Fall time : It is the time taken for the output to fall from 80% of its max value to 20% of its max value.
+
+x0 = 8.04034e-09, y0 = 2.64003
+
+x0 = 8.06818e-09, y0 = 0.659993
+
+From the above values , Fall Time = 0.0278 ns
+
+Propogation Delay : It is the time taken for the 50% of transition from 0 to 1 at the output for the 50% transistion from 1 to 0 at the input side.
+
+## Introduction to Magic and steps to load Sky130 tech-rules
+m3-layer
 ![Screenshot from 2024-08-02 23-20-17](https://github.com/user-attachments/assets/5c096c09-b3a8-4c0b-a02f-c33aa507f9f4)
-
+m3- Peripheral Rules
 ![Screenshot from 2024-08-02 23-21-46](https://github.com/user-attachments/assets/51f1a4bb-93ae-47dd-b041-ae90409a6b92)
 
-![Screenshot from 2024-08-02 23-24-55](https://github.com/user-attachments/assets/816dc837-bdfc-40ba-9940-9fe4362e5ebf)
 
-![Screenshot from 2024-08-02 23-31-27](https://github.com/user-attachments/assets/f35d0d0e-3157-4c02-86ee-494303410f45)
 
 ![Screenshot from 2024-08-02 23-32-15](https://github.com/user-attachments/assets/f11d0ebf-cd08-428e-b518-d49151354728)
 
