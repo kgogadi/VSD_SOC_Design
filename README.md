@@ -454,6 +454,8 @@ Open the tkcon window and give the command for grid according to the track file.
 Now we can see that both input and output ports are placed at the intersection of the tracks. Here our second condition also satisfies as 3 boxes are covered between the boundaries.
 ### Lab steps to convert magic layout to standard cell LEF
 Now we need to extract the LEF file.First save .mag file by using the command save **sky130_vsdinv.mag** in the tkcon terminal.
+![Screenshot from 2024-07-28 07-58-24](https://github.com/user-attachments/assets/5bc727e8-6d4e-4b54-bfe9-a4410d066e0c)
+![Screenshot from 2024-07-30 04-17-05](https://github.com/user-attachments/assets/ccd03ff7-553a-4257-9782-2cfa37e644dd)
 
 ![Screenshot from 2024-08-04 03-57-32](https://github.com/user-attachments/assets/45794d96-c6d5-46e4-8878-4a85a2c6cbee)
 ![Screenshot from 2024-08-04 04-47-10](https://github.com/user-attachments/assets/9bf50fc7-214c-4e91-bf9f-f9f0ddc4d693)
