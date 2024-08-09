@@ -526,25 +526,46 @@ After that we need to create another file called my_base.sdc in the src director
 ![Screenshot from 2024-08-06 03-26-56](https://github.com/user-attachments/assets/bb1a51b6-6966-424b-b348-e8048c40129a)
 ![Screenshot from 2024-08-06 03-38-13](https://github.com/user-attachments/assets/383cc74c-ae03-4a77-b763-0c214fa7637d)
 As we can see that Slack is equal to of that we got in synthesis stage. So STA is succesful.
+## Clock tree synthesis TritonCTS and signal integrity
+### Lab steps to run CTS using TritonCTS
+After improving the timing of the design, the previous design should be replaced with improved design by using the command
 
+**write_verilog //path of the previous design//**
+
+Now the design will get updated with the improved version.
+
+Now we can start working on it, starting with Floorplan by using the same commands that were used before. After succesful completion of Floorplan we should do placement by using the command **run_placement**.
 ![Screenshot from 2024-08-06 19-22-47](https://github.com/user-attachments/assets/10c41551-40fe-437d-9c75-cd0ea1ae6b95)
-
+After placement is done, we can proceed with cts stage. To perform CTS we should use the command **run_cts**.
+After completion of the cts we can observe that in the synthesis results directory a new .cts file is added. The newly added CTS file contains both the previous netlist and also the clock buffers that were added during the cts stage.
 ![Screenshot from 2024-08-06 19-27-38](https://github.com/user-attachments/assets/9897727d-c1f4-449a-a926-79f40782dca1)
 ![Screenshot from 2024-08-06 19-31-59](https://github.com/user-attachments/assets/c2246cde-9305-4ac3-925f-bf637a9f1080)
 ![Screenshot from 2024-08-06 19-32-35](https://github.com/user-attachments/assets/15096edb-e0a0-4d17-8876-b5e3420afa25)
-![Screenshot from 2024-08-06 19-45-32](https://github.com/user-attachments/assets/ed138c7d-26ae-411c-92a6-e544f10195d3)
+
+## Lab steps to execute OpenSTA with right timing libraries and CTS assignment
+To remove sky130_fd_sc_hd__clkbuf_1 from the list
+**set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]**
+To check the current value of CTS_CLK_BUFFER_LIST
+**echo $::env(CTS_CLK_BUFFER_LIST)**
+To check the current value of CURRENT_DEF
+**echo $::env(CURRENT_DEF)**
+To set def as placement def
+**set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/04-05_21-50/results/placement/picorv32a.placement.def**
+To run cts
+**run_cts**
+To check the current value of C**TS_CLK_BUFFER_LIST**
+**echo $::env(CTS_CLK_BUFFER_LIST)**
+
 ![Screenshot from 2024-08-06 19-49-10](https://github.com/user-attachments/assets/3abac2a1-2085-4dd8-9599-69740c84c60a)
 ![Screenshot from 2024-08-06 19-51-24](https://github.com/user-attachments/assets/179ec5ea-5b49-494c-b9bb-0a5ecf84421f)
-![Screenshot from 2024-08-06 20-10-39](https://github.com/user-attachments/assets/5196d981-e1c6-48ad-a898-473078258696)
+
 ![Screenshot from 2024-08-06 20-11-17](https://github.com/user-attachments/assets/eedd1d7e-8e12-4bb0-90c7-0be2f1ef1cb0)
 ![Screenshot from 2024-08-06 20-12-38](https://github.com/user-attachments/assets/f9535580-6084-4c90-a3dd-b8924987dbc3)
-![Screenshot from 2024-08-06 20-20-19](https://github.com/user-attachments/assets/02bdedfc-cf47-46ce-951c-b4d39672dd91)
-![Screenshot from 2024-08-06 20-29-34](https://github.com/user-attachments/assets/cf1b7138-8f9c-4a28-bc4e-f67c9d44efdb)
-![Screenshot from 2024-08-06 21-15-07](https://github.com/user-attachments/assets/16087586-2841-4eff-beb8-baa6fd352f08)
+
 ![Screenshot from 2024-08-06 21-20-33](https://github.com/user-attachments/assets/3041a73c-1a0b-49b1-a1ff-3c3670f8b617)
 ![Screenshot from 2024-08-06 21-41-39](https://github.com/user-attachments/assets/5ab2f092-27fc-4f59-86ff-acbf01a983b1)
 ![Screenshot from 2024-08-06 21-41-42](https://github.com/user-attachments/assets/6bbf2c48-ed6a-4523-beb8-3796c76e6e67)
-![Screenshot from 2024-08-06 21-42-15](https://github.com/user-attachments/assets/17e1da41-837c-4353-a8ea-6124398ed9ca)
+
 
 ![Screenshot from 2024-08-06 21-49-52](https://github.com/user-attachments/assets/200d14bb-ed6a-421b-bb44-18213b34934f)
 ![Screenshot from 2024-08-06 21-51-53](https://github.com/user-attachments/assets/21679afe-9ad8-4ef9-9150-d780e260ee17)
