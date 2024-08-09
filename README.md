@@ -448,32 +448,84 @@ From PNR point of view, while designing standard cell set two things must be con
 * The Input and output ports must lie on the intersection of the Vertical and Horizontal tracks.
 * The width of the standard cell should be an odd multiple of the track pitch and height should be an odd multiple of track vertical pitch.
 Open the tracks.info file to know more about tracks
+
 ![Screenshot from 2024-08-04 03-53-12](https://github.com/user-attachments/assets/7da4aafd-f516-4524-920d-a7bb16473680)
+
 In the cell design input and output ports are on the li1 layer.We need to convert the grid into tracks.
 Open the tkcon window and give the command for grid according to the track file.
 Now we can see that both input and output ports are placed at the intersection of the tracks. Here our second condition also satisfies as 3 boxes are covered between the boundaries.
 ### Lab steps to convert magic layout to standard cell LEF
 Now we need to extract the LEF file.First save .mag file by using the command save **sky130_vsdinv.mag** in the tkcon terminal.
+
 ![Screenshot from 2024-07-28 07-58-24](https://github.com/user-attachments/assets/5bc727e8-6d4e-4b54-bfe9-a4410d066e0c)
+
 Now in the tkcon terminal use the command lef write in order to create a LEF file.
-![Screenshot from 2024-08-04 04-47-10](https://github.com/user-attachments/assets/9bf50fc7-214c-4e91-bf9f-f9f0ddc4d693)
+
 ![Screenshot from 2024-08-02 20-32-24](https://github.com/user-attachments/assets/9e6d5728-17ab-4221-a200-2dc151479934)
 
-![Screenshot from 2024-08-05 19-53-10](https://github.com/user-attachments/assets/cee4ed8e-5545-4b5a-9d2a-61cb993a7310)
+### Introduction to timing libs and steps to include new cell in synthesis
+To proceed futher lets keep all the required files at single place thet is in src directory. First copy the extracted LEF file into src directory.
+
+After LEF file we need to copy the required libraries, here we will have different types of libraries such as fast , slow, typical etc.. , we need to copy all those .lib files to src directory by using cp command.
+Now we need to make some changes in the .config file as shown in the image
+
+![Screenshot from 2024-08-04 04-47-10](https://github.com/user-attachments/assets/9bf50fc7-214c-4e91-bf9f-f9f0ddc4d693)
+
+After that we need to open bash using command docker being in openlane directory. And enter into the open lane and prepare the design as shown in figure. Once preparation is complete we need to use following commands
+
+**set lefs [glob $::env(DESIGN_DIR)/src/*.lef]**
+
+**add_lefs -src $lefs**
+And now again use the command **run_synthesis** and check whether it maps our custom vsdinverter or not.
+
 ![Screenshot from 2024-08-05 19-55-31](https://github.com/user-attachments/assets/9e4173eb-d65a-45a1-b456-0a8f4596f9ec)
-![Screenshot from 2024-08-05 22-53-59](https://github.com/user-attachments/assets/8b62ed63-a041-4d7a-9cb7-508cacceed84)
+
 ![Screenshot from 2024-08-05 23-44-57](https://github.com/user-attachments/assets/91d45a58-4180-4966-a846-75b2e6f94042)
+
+### From the above figure we can see that synthesis was succesful and also we have 1554 instances of our vsdinverter. So this stage is successful.
+
+Lab steps to configure synthesis settings to fix slack and include vsdinv
+As we completed with synthesis stage, now we need to perform floorplan by using the following commands
+
+**init_floorplan**
+
 ![Screenshot from 2024-08-05 23-58-20](https://github.com/user-attachments/assets/0a7866ab-bc1a-43c5-bf48-8a58dea2fab7)
+**place_io**
+
 ![Screenshot from 2024-08-05 23-58-31](https://github.com/user-attachments/assets/f14abbfb-1ccd-49b4-b580-ab6d499dc88b)
+
+**tap_decap_or**
+
 ![Screenshot from 2024-08-05 23-59-21](https://github.com/user-attachments/assets/fc043d93-d6d1-4aab-a152-52c373b31f0f)
+
+Now as we done with Floorplan stage, we can proceed to placement stage by using the command **run_placement**
+
 ![Screenshot from 2024-08-06 00-14-13](https://github.com/user-attachments/assets/6670adbb-8762-4d73-ac49-7a26a90eb0fa)
+
+Now after the placement is done,lets check whether the cell that we have created is placed in the design. For this being in the placement directory we should use the command
+
+**magic -T** **/home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &**
+
 ![Screenshot from 2024-08-06 00-24-22](https://github.com/user-attachments/assets/b1da4885-e4d7-4162-9f31-8550f279c1c7)
+
+Clearly we can see that the cell that we have created " sky130_vsdinv" is placed in the design and now lets check whether it is alligned correctly with other cells or not by using the command expand in the tkcon terminal and it's alligned.
+
 ![Screenshot from 2024-08-06 00-55-13](https://github.com/user-attachments/assets/c961ba34-57c3-4263-963a-17207a804a3d)
+
+## Timing analysis with ideal clocks using openSTA
+### Steps to configure OpenSTA for post-synth timing analysis
+Next step is to perform STA on the design. For this first we need to complete the synthesis stage. After synthesis is done some steps need to be followed.
+
+First, we need to create a new file **pre_sta.conf** in the openlane directory.
+After that we need to create another file called my_base.sdc in the src directory which is picorv32a directory.
+![Screenshot from 2024-08-06 18-50-18](https://github.com/user-attachments/assets/d3b9b543-260d-4d5b-adbf-ad3e30dc1cf5)
+
+
 ![Screenshot from 2024-08-06 03-03-19](https://github.com/user-attachments/assets/f81f276e-1b45-42db-9941-72d90a9a66c9)
 ![Screenshot from 2024-08-06 03-26-02](https://github.com/user-attachments/assets/b8716f6d-7060-499c-a828-cddb0223a240)
 ![Screenshot from 2024-08-06 03-26-56](https://github.com/user-attachments/assets/bb1a51b6-6966-424b-b348-e8048c40129a)
 ![Screenshot from 2024-08-06 03-38-13](https://github.com/user-attachments/assets/383cc74c-ae03-4a77-b763-0c214fa7637d)
-![Screenshot from 2024-08-06 18-50-18](https://github.com/user-attachments/assets/d3b9b543-260d-4d5b-adbf-ad3e30dc1cf5)
+As we can see that Slack is equal to of that we got in synthesis stage. So STA is succesful.
 
 ![Screenshot from 2024-08-06 19-22-47](https://github.com/user-attachments/assets/10c41551-40fe-437d-9c75-cd0ea1ae6b95)
 
