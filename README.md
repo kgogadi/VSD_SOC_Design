@@ -544,16 +544,27 @@ After completion of the cts we can observe that in the synthesis results directo
 
 ## Lab steps to execute OpenSTA with right timing libraries and CTS assignment
 To remove sky130_fd_sc_hd__clkbuf_1 from the list
+
 **set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]**
+
 To check the current value of CTS_CLK_BUFFER_LIST
+
 **echo $::env(CTS_CLK_BUFFER_LIST)**
+
 To check the current value of CURRENT_DEF
+
 **echo $::env(CURRENT_DEF)**
+
 To set def as placement def
+
 **set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/04-05_21-50/results/placement/picorv32a.placement.def**
+
 To run cts
+
 **run_cts**
+
 To check the current value of C**TS_CLK_BUFFER_LIST**
+
 **echo $::env(CTS_CLK_BUFFER_LIST)**
 
 ![Screenshot from 2024-08-06 19-49-10](https://github.com/user-attachments/assets/3abac2a1-2085-4dd8-9599-69740c84c60a)
@@ -563,12 +574,61 @@ To check the current value of C**TS_CLK_BUFFER_LIST**
 ![Screenshot from 2024-08-06 20-12-38](https://github.com/user-attachments/assets/f9535580-6084-4c90-a3dd-b8924987dbc3)
 
 ![Screenshot from 2024-08-06 21-20-33](https://github.com/user-attachments/assets/3041a73c-1a0b-49b1-a1ff-3c3670f8b617)
+### Steps to observe impact of bigger CTS buffers on setup and hold timing
+We need to follow the similar steps that we have followed earlier in the openroad.
+
+**read_lef /openLANE_flow/designs/picorv32a/runs/04-05_21-50/tmp/merged.lef**
+
+**read_def /openLANE_flow/designs/picorv32a/runs/04-05_21-50/results/cts/picorv32a.cts.def**
+
+**write_db pico_cts1.db**
+
+**read_db pico_cts1.db**
+
+**read_verilog /openLANE_flow/designs/picorv32a/runs/04-05_21-50/results/synthesis/picorv32a.synthesis_cts.v**
+
+**read_liberty $::env(LIB_SYNTH_COMPLETE)**
+
+**link_design picorv32a**
+
+**read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc**
+
+**set_propagated_clock [all_clocks]**
+
+**report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4**
+
+**report_clock_skew -hold**
+
+**report_clock_skew -setup**
+
 ![Screenshot from 2024-08-06 21-41-39](https://github.com/user-attachments/assets/5ab2f092-27fc-4f59-86ff-acbf01a983b1)
 ![Screenshot from 2024-08-06 21-41-42](https://github.com/user-attachments/assets/6bbf2c48-ed6a-4523-beb8-3796c76e6e67)
 
 
 ![Screenshot from 2024-08-06 21-49-52](https://github.com/user-attachments/assets/200d14bb-ed6a-421b-bb44-18213b34934f)
+## Power Distribution Network and routing
+### Steps to build power distribution network
+After completion of CTS, now we need to lay down power distribution network(PDN) for the design and it is done by using the command **gen_pdn** .
 ![Screenshot from 2024-08-06 21-51-53](https://github.com/user-attachments/assets/21679afe-9ad8-4ef9-9150-d780e260ee17)
 ![Screenshot from 2024-08-06 21-59-02](https://github.com/user-attachments/assets/f43f4472-19cd-4936-a925-5de613f1b48e)
+### Steps from power straps to std cell power
+In the below figure we can observe the path through which power is delivered all the way to standard cells.
+
+The blocks that we can observe around the design are I/o pads and those with Red and Blue colours are Power Pads. Red pad is for power and the Blue one is for Gnd.
+
+Those blocks are connected to Power and Gnd Rings, which go around the design and supply power to straps.
+
+The vertical connections that we can observe for the rings are called Power Straps.
+
+From Power straps and Rings connections will be made to the Power rails. The standard cell will be placed in between these power rails. The height of the standard cells should be the multiples of the pitch of the rails in order to get power and gnd supplies accurately.
+
+This is the overview of the PDN structure.
+
+![image](https://github.com/user-attachments/assets/607cdd73-39a2-4905-beb1-b78b9fb988f5)
+
+## Basics of global and detail routing and configure TritonRoute
+The Final stage in the flow is ROUTING. we can start routing by using the command **run_routing
+**
 ![Screenshot from 2024-08-06 22-12-15](https://github.com/user-attachments/assets/7bffaeae-8270-4efa-b519-807202940972)
 ![Screenshot from 2024-08-06 22-10-46](https://github.com/user-attachments/assets/738b35e6-c934-4ab9-afb2-4676769317bd)
+From tha above figures we can see that routing is done and it is done with 0 violations, So our routing is succesful but we can see the negative slack. We need to eliminate that negative slack for succesful completion of Physical design flow.
