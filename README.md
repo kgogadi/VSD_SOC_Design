@@ -435,6 +435,11 @@ Now load nwell.mag file into the magic and check for violations.
 ![Screenshot from 2024-08-03 00-15-59](https://github.com/user-attachments/assets/aff3f7fc-1929-4b1a-9538-7345a3ffda81)
 ![Screenshot from 2024-08-03 00-21-54](https://github.com/user-attachments/assets/c495ee83-6c3c-4fae-a087-3b952b943381)
 After updating the tech file load it again and check for errors
+
+![Screenshot from 2024-08-03 00-35-11](https://github.com/user-attachments/assets/c28a5c1f-72a7-4876-a2ab-f6b1011eff65)
+
+![Screenshot from 2024-08-03 00-38-37](https://github.com/user-attachments/assets/49fc1fda-848b-4c46-8197-dd2b6a99be4d)
+Now after tapping the nwell violations are resolved.
 # Pre-layout timing analysis and importance of good clock tree
 ## Timing modelling using delay tables
 ### Steps to convert grid info to track info
@@ -443,13 +448,13 @@ From PNR point of view, while designing standard cell set two things must be con
 * The Input and output ports must lie on the intersection of the Vertical and Horizontal tracks.
 * The width of the standard cell should be an odd multiple of the track pitch and height should be an odd multiple of track vertical pitch.
 Open the tracks.info file to know more about tracks
-![Screenshot from 2024-08-03 00-35-11](https://github.com/user-attachments/assets/c28a5c1f-72a7-4876-a2ab-f6b1011eff65)
+![Screenshot from 2024-08-04 03-53-12](https://github.com/user-attachments/assets/7da4aafd-f516-4524-920d-a7bb16473680)
 In the cell design input and output ports are on the li1 layer.We need to convert the grid into tracks.
 Open the tkcon window and give the command for grid according to the track file.
 Now we can see that both input and output ports are placed at the intersection of the tracks. Here our second condition also satisfies as 3 boxes are covered between the boundaries.
-![Screenshot from 2024-08-03 00-38-37](https://github.com/user-attachments/assets/49fc1fda-848b-4c46-8197-dd2b6a99be4d)
-Now after tapping the nwell violations are resolved.
-![Screenshot from 2024-08-04 03-53-12](https://github.com/user-attachments/assets/7da4aafd-f516-4524-920d-a7bb16473680)
+### Lab steps to convert magic layout to standard cell LEF
+Now we need to extract the LEF file.First save .mag file by using the command save **sky130_vsdinv.mag** in the tkcon terminal.
+
 ![Screenshot from 2024-08-04 03-57-32](https://github.com/user-attachments/assets/45794d96-c6d5-46e4-8878-4a85a2c6cbee)
 ![Screenshot from 2024-08-04 04-47-10](https://github.com/user-attachments/assets/9bf50fc7-214c-4e91-bf9f-f9f0ddc4d693)
 ![Screenshot from 2024-08-05 19-53-10](https://github.com/user-attachments/assets/cee4ed8e-5545-4b5a-9d2a-61cb993a7310)
