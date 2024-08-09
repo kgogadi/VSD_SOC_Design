@@ -455,9 +455,7 @@ Now we can see that both input and output ports are placed at the intersection o
 ### Lab steps to convert magic layout to standard cell LEF
 Now we need to extract the LEF file.First save .mag file by using the command save **sky130_vsdinv.mag** in the tkcon terminal.
 ![Screenshot from 2024-07-28 07-58-24](https://github.com/user-attachments/assets/5bc727e8-6d4e-4b54-bfe9-a4410d066e0c)
-![Screenshot from 2024-07-30 04-17-05](https://github.com/user-attachments/assets/ccd03ff7-553a-4257-9782-2cfa37e644dd)
-
-![Screenshot from 2024-08-04 03-57-32](https://github.com/user-attachments/assets/45794d96-c6d5-46e4-8878-4a85a2c6cbee)
+Now in the tkcon terminal use the command lef write in order to create a LEF file.
 ![Screenshot from 2024-08-04 04-47-10](https://github.com/user-attachments/assets/9bf50fc7-214c-4e91-bf9f-f9f0ddc4d693)
 ![Screenshot from 2024-08-05 19-53-10](https://github.com/user-attachments/assets/cee4ed8e-5545-4b5a-9d2a-61cb993a7310)
 ![Screenshot from 2024-08-05 19-55-31](https://github.com/user-attachments/assets/9e4173eb-d65a-45a1-b456-0a8f4596f9ec)
