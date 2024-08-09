@@ -457,6 +457,8 @@ Now we need to extract the LEF file.First save .mag file by using the command sa
 ![Screenshot from 2024-07-28 07-58-24](https://github.com/user-attachments/assets/5bc727e8-6d4e-4b54-bfe9-a4410d066e0c)
 Now in the tkcon terminal use the command lef write in order to create a LEF file.
 ![Screenshot from 2024-08-04 04-47-10](https://github.com/user-attachments/assets/9bf50fc7-214c-4e91-bf9f-f9f0ddc4d693)
+![Screenshot from 2024-08-02 20-32-24](https://github.com/user-attachments/assets/9e6d5728-17ab-4221-a200-2dc151479934)
+
 ![Screenshot from 2024-08-05 19-53-10](https://github.com/user-attachments/assets/cee4ed8e-5545-4b5a-9d2a-61cb993a7310)
 ![Screenshot from 2024-08-05 19-55-31](https://github.com/user-attachments/assets/9e4173eb-d65a-45a1-b456-0a8f4596f9ec)
 ![Screenshot from 2024-08-05 22-53-59](https://github.com/user-attachments/assets/8b62ed63-a041-4d7a-9cb7-508cacceed84)
