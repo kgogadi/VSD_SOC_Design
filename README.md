@@ -620,3 +620,7 @@ The Final stage in the flow is ROUTING. we can start routing by using the comman
 ![Screenshot from 2024-08-06 22-12-15](https://github.com/user-attachments/assets/7bffaeae-8270-4efa-b519-807202940972)
 ![Screenshot from 2024-08-06 22-10-46](https://github.com/user-attachments/assets/738b35e6-c934-4ab9-afb2-4676769317bd)
 From tha above figures we can see that routing is done and it is done with 0 violations, So our routing is succesful but we can see the negative slack. We need to eliminate that negative slack for succesful completion of Physical design flow.
+
+Acknowlegements 
+
+Thank you Kunal Gosh for conducting the workshop and AnoushkaTripathi's clearly guided documentation on workshop has helped me complete the VSD_SoC workshop
