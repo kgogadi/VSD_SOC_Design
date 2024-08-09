@@ -621,6 +621,6 @@ The Final stage in the flow is ROUTING. we can start routing by using the comman
 ![Screenshot from 2024-08-06 22-10-46](https://github.com/user-attachments/assets/738b35e6-c934-4ab9-afb2-4676769317bd)
 From tha above figures we can see that routing is done and it is done with 0 violations, So our routing is succesful but we can see the negative slack. We need to eliminate that negative slack for succesful completion of Physical design flow.
 
-Acknowlegements 
+## Acknowlegements 
 
-Thank you Kunal Gosh for conducting the workshop and AnoushkaTripathi's clearly guided documentation on workshop has helped me complete the VSD_SoC workshop
+I would like to express my sincere gratitude to Kunal Ghosh for conducting the VSD_SoC workshop and providing invaluable insights into the ASIC physical design flow. Special thanks also go to Anoushka Tripathi for her exceptionally clear and detailed documentation, which was instrumental in guiding me through the workshop and the completion of this project. Your expertise and support have been greatly appreciated.
