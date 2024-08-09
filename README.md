@@ -179,18 +179,6 @@ And at the end, we perform Physical Verification. Which includes DRC(Design Rule
 * MAGIC is used for DRC and SPICE Extraction from Layout.
 * MAGIC and Netgen are used for LVS by comparing Extracted SPICE by MAGIC and Verilog Netlist.
 
-##Get familiar to open-source EDA tools
-###OpenLane Directory Structure
-In order to access the OpenLane tool, we will be needing some basic linux commands.They are listed below
-
-* pwd : It displays the present working directory and its path.
-* cd : Using this command we can move in both ways in the directory tree.
-* ls : It lists all the sub-directories and files present in the current directory.
-* mkdir : Using this command, we can create a new directory.
-* rmdir : Using his command, we can delete an existing directory.
-* rm : This command is used to delete the files.
-* help : using this command we can know the working of any command.
-* clear : This command clears the terminal.
 
 ###Design Preparation Setup
 In order to enter into BASH, by being in OpenLane directory we should use a command called **docker**. By using docker command we will enter into the Bash. After entering into bash we have to use the script flow.tcl, because this .tcl file contains the steps that need to be executed in the OpenLane and along with the tcl file we need to use **-interactive** switch in order to perform step by step process. If not used interactive switch the whole flow i.e RTL to GDS will be executed once and the final report will be given. The command that we should use for this is **./flow.tcl -interactive**.Now OpenLane is opened and we can observe the change in prompt and now we have to input packages required to run the flow and for this we use the command **package require openlane 0.9**.
