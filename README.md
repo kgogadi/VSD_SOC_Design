@@ -1,3 +1,8 @@
+![image](https://github.com/user-attachments/assets/c2b61fa5-6537-4692-accb-b6e22807c073)
+
+
+
+
 # VSD_SOC_Design
 # Inception of open-source EDA, OpenLANE and Sky130 PDK
 ## How to talk to computers
